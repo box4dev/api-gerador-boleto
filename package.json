@@ -15,7 +15,7 @@
     "biome:format": "biome format --write ./src",
     "biome:lint": "biome lint --write ./src",
     "biome:check": "biome check --write ./src",
-    "biome:ci": "biome ci"
+    "biome:ci": "biome ci ./src"
   },
   "keywords": [
     "boleto",
