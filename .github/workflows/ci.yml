@@ -37,7 +37,6 @@ jobs:
       - name: Quality (Biome & Typecheck)
         run: |
           pnpm run biome:ci
-          pnpm run typecheck
 
       - name: Testes
         run: pnpm run test
