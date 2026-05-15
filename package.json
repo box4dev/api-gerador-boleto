@@ -38,7 +38,8 @@
     "@types/node": "^20.6.0",
     "tsup": "^8.5.1",
     "tsx": "^4.22.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "wrangler": "^4.91.0"
   },
   "engines": {
     "node": ">=20.6.0"

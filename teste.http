@@ -1,4 +1,4 @@
-POST http://localhost:3000/api/boleto/generate
+POST https://api.box4.dev/api/boleto/generate
 Content-Type: application/json
 
 {
