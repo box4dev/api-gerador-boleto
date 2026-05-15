@@ -5,13 +5,13 @@
 </p>
 
 <p align="center">
-  <b>API Gerador de Boleto no padrão FEBRABAN: Linha Digitável e Código de Barras. Sem HTML, PDF ou renderização gráfica — apenas dados prontos para JSON.</b>
+  <b>API Gerador de Boleto no padrão FEBRABAN: Linha Digitável e Código de Barras.<br>
+  Sem HTML, PDF ou renderização gráfica — apenas dados prontos para JSON.</b>
 </p>
 
 <p align="center">Ideal para geração de massa para testes automatizados.</p>
 
 <p align="center">
-  <img src="https://img.shields.io/npm/v/@box4dev/api-gerador-boleto?style=flat-square" alt="npm version" />
   <img src="https://img.shields.io/npm/l/@box4dev/api-gerador-boleto?style=flat-square" alt="license" />
   <img src="https://img.shields.io/github/actions/workflow/status/box4dev/api-gerador-boleto/ci.yml?style=flat-square" alt="build status" />
 </p>
