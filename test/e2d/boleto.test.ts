@@ -81,6 +81,7 @@ describe('E2E: Fluxo de Geração de Boletos', () => {
       // O Hono captura erro de parsing de JSON e pode retornar 400 ou 500
       // dependendo de como o middleware de parsing está configurado.
       assert.ok(res.status >= 400);
+      assert.strictEqual(res.status, 400); // Agora deve ser 400
     });
 
   });

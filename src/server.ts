@@ -1,20 +1,22 @@
 import { serve } from '@hono/node-server';
 import app from './app';
 
-const PORT = Number(process.env.PORT) || 3000;
-
 /**
- * Starts the Hono API server using the Node.js adapter.
+ * Inicia o servidor Node.js apenas se detectado o ambiente Node.
+ * Isso permite que o mesmo arquivo funcione no Cloudflare Workers (que usa o export default).
  */
-serve(
-  {
-    fetch: app.fetch,
-    port: PORT,
-  },
-  (info) => {
-    console.log(`Server is running on port ${info.port}`);
-    console.log(`Access the API at http://localhost:${info.port}/api/boleto/generate`);
-  },
-);
+if (typeof process !== 'undefined' && process.versions?.node) {
+  const PORT = Number(process.env.PORT) || 3000;
+  serve(
+    {
+      fetch: app.fetch,
+      port: PORT,
+    },
+    (info) => {
+      console.log(`Server is running on Node.js port ${info.port}`);
+      console.log(`Access the API at http://localhost:${info.port}/api/boleto/generate`);
+    },
+  );
+}
 
-export default app; // Export app for testing purposes
+export default app;

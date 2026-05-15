@@ -2,5 +2,12 @@ POST http://localhost:3000/api/boleto/generate
 Content-Type: application/json
 
 {
-  "banco": "bradesco",
+  "banco": "santander",
+  "dataEmissao": "2026-05-14",
+  "dataVencimento": "2026-12-31",
+  "valorDocumento": 15000,
+  "nossoNumero": "12345678",
+  "agencia": "1234",
+  "codigoCedente": "12345",
+  "carteira": "109"
 }
