@@ -1,0 +1,6 @@
+POST http://localhost:3000/api/boleto/generate
+Content-Type: application/json
+
+{
+  "banco": "bradesco",
+}

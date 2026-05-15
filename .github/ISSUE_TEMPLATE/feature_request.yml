@@ -1,0 +1,34 @@
+name: "Sugerir uma Funcionalidade 💡"
+description: "Dê uma ideia para melhoria"
+title: "[FEATURE]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tem uma ideia para tornar a api-gerador-boleto ainda melhor? Adoraríamos ouvi-la!
+  - type: textarea
+    id: problem_description
+    attributes:
+      label: Sua sugestão resolve algum problema?
+      description: Uma descrição clara e concisa do problema (se houver).
+      placeholder: "Ex: Atualmente não temos gerador para o banco X..."
+    validations:
+      required: true
+  - type: textarea
+    id: solution_description
+    attributes:
+      label: Descreva a solução que você deseja
+      description: Uma descrição clara e concisa do que você deseja que aconteça.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: Uma descrição clara e concisa de quaisquer soluções ou recursos alternativos que você considerou. 
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Contexto Adicional
+      description: Adicione qualquer outra informação ou capturas de tela aqui.

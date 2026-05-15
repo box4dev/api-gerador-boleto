@@ -1,0 +1,8 @@
+# O arquivo CODEOWNERS usa um formato semelhante ao .gitignore.
+# Documentação: https://docs.github.com/pt/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# O dono padrão (Global) que será automaticamente marcado para revisar qualquer alteração
+*       @box4dev
+
+# Dica: Você também pode especificar pastas e usuários/times diferentes:
+# .github/workflows/   @seutime-devops

@@ -1,0 +1,56 @@
+name: "Relatar um Bug 🐛"
+description: "Crie um relatório para nos ajudar a melhorar o api-gerador-boleto"
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por reservar um tempo para relatar um bug! Por favor, preencha as informações abaixo.
+  - type: input
+    id: value_caused_error
+    attributes:
+      label: Dados que causou o erro
+      description: Com quais dados você estava tentando gerar o boleto? (Ex: banco, dataEmissao, dataVencimento, valorDocumento, nossoNumero, agencia, codigoCedente, carteira)
+      placeholder: "Ex: banco: 'itau', dataEmissao: 14/05/2026, dataVencimento: 21/05/2026, valorDocumento: 83297, nossoNumero: '30672934', agencia: '3907', codigoCedente: '69608', carteira: '109'"
+    validations:
+      required: true
+  - type: dropdown
+    id: boleto_type
+    attributes:
+      label: Qual tipo de boleto apresentou o problema?
+      options:
+        - Itau
+        - Santander
+        - Caixa
+        - Bradesco
+        - Outro
+    validations:
+      required: true
+  - type: textarea
+    id: current_behavior
+    attributes:
+      label: Comportamento Atual
+      description: O que aconteceu?
+      placeholder: "Ex: A api-gerador-boleto gerou um boleto inválido."
+    validations:
+      required: true
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Comportamento Esperado
+      description: O que você esperava que acontecesse?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Versão da Biblioteca
+      placeholder: "Ex: 1.0.0"
+    validations:
+      required: false
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Contexto Adicional
+      description: Adicione qualquer outra informação ou capturas de tela aqui.
