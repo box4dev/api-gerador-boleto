@@ -7,22 +7,8 @@ import { z } from 'zod';
 export const gerarBoletoSchema = z
   .object({
     banco: z.enum(['bradesco', 'caixa', 'itau', 'santander']).optional(),
-    dataEmissao: z
-      .preprocess((arg) => {
-        if (typeof arg === 'string' || arg instanceof Date) {
-          return new Date(arg);
-        }
-        return arg;
-      }, z.date())
-      .optional(),
-    dataVencimento: z
-      .preprocess((arg) => {
-        if (typeof arg === 'string' || arg instanceof Date) {
-          return new Date(arg);
-        }
-        return arg;
-      }, z.date())
-      .optional(),
+    dataEmissao: z.string().date().optional(),
+    dataVencimento: z.string().date().optional(),
     valorDocumento: z.number().int().positive().optional(),
     nossoNumero: z.string().optional(),
     agencia: z.string().optional(),
@@ -35,6 +21,6 @@ export const gerarBoletoSchema = z
     instrucoesPagamento: z.string().optional(),
     identificadorEmissao: z.string().optional(),
   })
-  .strict(); // Use .strict() to disallow unknown keys
+  .strict();
 
 export type GerarBoletoInput = z.infer<typeof gerarBoletoSchema>;

@@ -1,22 +1,58 @@
-import { zValidator } from '@hono/zod-validator';
-import { Hono } from 'hono';
+import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 import { BoletoService } from '../services/boleto.service';
 import { gerarBoletoSchema } from '../validators/boleto.validator';
 
-const router = new Hono();
+const router = new OpenAPIHono();
 const boletoService = new BoletoService();
 
 /**
- * Rota para gerar dados de boleto.
- * O zValidator já valida o corpo da requisição contra o schema do Zod
- * e retorna status 400 automaticamente caso os dados sejam inválidos.
+ * Schema de exemplo para a resposta na documentação
  */
-router.post('/generate', zValidator('json', gerarBoletoSchema), (c) => {
-  // c.req.valid('json') recupera os dados já validados e tipados
+const boletoResponseSchema = z.object({
+  codigoBarras: z.string(),
+  linhaDigitavel: z.string(),
+  banco: z.string(),
+  codigoBanco: z.string(),
+  dataEmissao: z.string(),
+  dataVencimento: z.string(),
+  valorDocumento: z.number(),
+});
+
+/**
+ * Tipo inferido do schema de resposta para evitar o uso de 'any'
+ */
+type BoletoResponse = z.infer<typeof boletoResponseSchema>;
+
+const generateRoute = createRoute({
+  method: 'post',
+  path: '/generate',
+  summary: 'Gera dados de um boleto',
+  description:
+    'Cria linha digitável e código de barras baseado nos parâmetros fornecidos ou gera dados aleatórios.',
+  request: {
+    body: {
+      content: {
+        'application/json': { schema: gerarBoletoSchema },
+      },
+    },
+  },
+  responses: {
+    200: {
+      content: {
+        'application/json': { schema: boletoResponseSchema },
+      },
+      description: 'Boleto gerado com sucesso',
+    },
+  },
+});
+
+/**
+ * Implementação da rota utilizando o contrato OpenAPI
+ */
+router.openapi(generateRoute, (c) => {
   const validatedParams = c.req.valid('json');
   const boletoData = boletoService.generateBoleto(validatedParams);
-
-  return c.json(boletoData);
+  return c.json(boletoData as BoletoResponse, 200);
 });
 
 export default router;

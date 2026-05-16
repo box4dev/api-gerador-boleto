@@ -1,11 +1,9 @@
-import { describe, it } from 'node:test';
 import assert from 'node:assert';
+import { describe, it } from 'node:test';
 import app from '../../src/app';
 
 describe('E2E: Fluxo de Geração de Boletos', () => {
-
   describe('POST /api/boleto/generate', () => {
-
     // Cenário Positivo: Geração Randômica (Cobre o if do payload vazio)
     it('deve gerar um boleto com dados aleatórios quando o body está vazio', async () => {
       const res = await app.request('/api/boleto/generate', {
@@ -43,7 +41,7 @@ describe('E2E: Fluxo de Geração de Boletos', () => {
         nossoNumero: '12345678',
         agencia: '1234',
         codigoCedente: '12345',
-        carteira: '109'
+        carteira: '109',
       };
 
       const res = await app.request('/api/boleto/generate', {
@@ -78,10 +76,7 @@ describe('E2E: Fluxo de Geração de Boletos', () => {
         body: '{ "invalid": json }',
       });
 
-      // O Hono captura erro de parsing de JSON e pode retornar 400 ou 500
-      // dependendo de como o middleware de parsing está configurado.
       assert.strictEqual(res.status, 400); // Agora deve ser 400
     });
-
   });
 });

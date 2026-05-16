@@ -1,5 +1,5 @@
-import { describe, it } from 'node:test';
 import assert from 'node:assert';
+import { describe, it } from 'node:test';
 // Importamos o schema diretamente para testar a lógica de validação sem HTTP
 import { gerarBoletoSchema } from '../../src/validators/boleto.validator';
 
@@ -8,31 +8,29 @@ describe('Unit: Boleto Validator', () => {
     const validData = {
       banco: 'itau',
       dataEmissao: '2026-05-14',
-      dataVencimento: new Date(),
+      dataVencimento: '2026-05-21',
       valorDocumento: 15000, // centavos
       nossoNumero: '12345678',
       agencia: '1234',
       codigoCedente: '12345',
-      carteira: '109'
+      carteira: '109',
     };
 
     const result = gerarBoletoSchema.safeParse(validData);
     assert.strictEqual(result.success, true);
   });
 
-  it('deve aceitar tipos invertidos para as datas para cobrir todos os ramos lógicos', () => {
+  it('deve aceitar datas válidas em formato string ISO', () => {
     const validData = {
-      // Invertendo o que foi feito no teste anterior para forçar o motor a passar
-      // por todas as partes da condição OR (||) em ambos os campos.
-      dataEmissao: new Date(),   // dataEmissao: Testa o ramo instanceof Date (A=false, B=true)
-      dataVencimento: '2026-12-31' // dataVencimento: Testa o ramo typeof string (A=true)
+      dataEmissao: '2026-05-14',
+      dataVencimento: '2026-12-31',
     };
 
     const result = gerarBoletoSchema.safeParse(validData);
     assert.strictEqual(result.success, true);
     if (result.success) {
-      assert.ok(result.data.dataEmissao instanceof Date);
-      assert.ok(result.data.dataVencimento instanceof Date);
+      assert.strictEqual(typeof result.data.dataEmissao, 'string');
+      assert.strictEqual(typeof result.data.dataVencimento, 'string');
     }
   });
 
@@ -58,11 +56,11 @@ describe('Unit: Boleto Validator', () => {
   });
 
   it('deve cobrir o retorno padrão (ramo else) do preprocess para ambos os campos', () => {
-    // Passar algo que não é string nem Date para ambos
+    // Passar algo que não é string para ambos
     // Isso garante que o "return arg" seja executado em todas as instâncias do preprocess
     const result = gerarBoletoSchema.safeParse({
       dataEmissao: 123,
-      dataVencimento: true
+      dataVencimento: true,
     });
     assert.strictEqual(result.success, false);
   });

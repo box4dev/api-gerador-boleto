@@ -6,11 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": [
-      "src/**/*.ts",
-      "test/**/*.ts",
-      "!**/*.min.js"
-    ]
+    "includes": ["src/**/*.ts", "test/**/*(unit|e2e)/**/*.test.ts", "!**/*.min.js"]
   },
   "formatter": {
     "enabled": true,
@@ -21,10 +17,7 @@
   },
   "linter": {
     "enabled": true,
-    "includes": [
-      "**",
-      "!test/**"
-    ],
+    "includes": ["**"],
     "rules": {
       "recommended": true,
       "style": {

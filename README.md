@@ -19,6 +19,14 @@
 
 **Utiliza o Pacote NPM:** [@box4dev/gerador-boleto](https://www.npmjs.com/package/@box4dev/gerador-boleto)
 
+## 🚀 Demo & Documentação
+
+A API está disponível publicamente para testes e integração:
+
+- **Documentação Interativa (Swagger UI):** [https://api.box4.dev/swagger](https://api.box4.dev/swagger)
+- **Contrato OpenAPI (JSON):** [https://api.box4.dev/openapi.json](https://api.box4.dev/openapi.json)
+- **Endpoint de Geração:** `https://api.box4.dev/api/boleto/generate`
+
 ## Características
 Gera linha digitável e código de barras (44 dígitos) para os bancos:
 
