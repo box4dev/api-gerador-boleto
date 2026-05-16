@@ -32,14 +32,80 @@ const generateRoute = createRoute({
   request: {
     body: {
       content: {
-        'application/json': { schema: gerarBoletoSchema },
+        'application/json': {
+          schema: {
+            type: 'object',
+            properties: {
+              banco: { type: 'string', enum: ['bradesco', 'caixa', 'itau', 'santander'] },
+              dataEmissao: { type: 'string', format: 'date' },
+              dataVencimento: { type: 'string', format: 'date' },
+              valorDocumento: { type: 'integer' },
+              nossoNumero: { type: 'string' },
+              agencia: { type: 'string' },
+              codigoCedente: { type: 'string' },
+              carteira: { type: 'string' },
+              localPagamento: { type: 'string' },
+              numeroDocumento: { type: 'string' },
+              cedente: { type: 'string' },
+              cedenteCnpj: { type: 'string' },
+              instrucoesPagamento: { type: 'string' },
+              identificadorEmissao: { type: 'string' },
+            },
+            example: {
+              banco: 'itau',
+              dataEmissao: '2024-01-01',
+              dataVencimento: '2024-02-01',
+              valorDocumento: 10000,
+              nossoNumero: '123456789',
+              agencia: '1234',
+              codigoCedente: '12345',
+              carteira: '175',
+              localPagamento: 'Pagável em qualquer banco até o vencimento',
+              numeroDocumento: '123456',
+              cedente: 'Empresa Exemplo LTDA',
+              cedenteCnpj: '12345678000190',
+              instrucoesPagamento: 'Não receber após o vencimento',
+              identificadorEmissao: '1',
+            },
+          },
+        },
       },
     },
   },
   responses: {
     200: {
       content: {
-        'application/json': { schema: boletoResponseSchema },
+        'application/json': {
+          schema: {
+            type: 'object',
+            properties: {
+              codigoBarras: { type: 'string' },
+              linhaDigitavel: { type: 'string' },
+              banco: { type: 'string' },
+              codigoBanco: { type: 'string' },
+              dataEmissao: { type: 'string', format: 'date' },
+              dataVencimento: { type: 'string', format: 'date' },
+              valorDocumento: { type: 'number' },
+            },
+            required: ['codigoBarras', 'linhaDigitavel', 'banco', 'codigoBanco', 'dataEmissao', 'dataVencimento', 'valorDocumento'],
+            example: {
+              "codigoBarras": "34193145300000814041045660636010055705743000",
+              "linhaDigitavel": "34191.04561 60636.010054 57057.430001 3 14530000081404",
+              "banco": "itau",
+              "codigoBanco": "341-7",
+              "dataEmissao": "2026-05-16T00:00:00.000Z",
+              "dataVencimento": "2026-05-21T00:00:00.000Z",
+              "valorDocumento": 81404,
+              "nossoNumero": 56606360,
+              "nossoNumeroDv": 3,
+              "agencia": 55,
+              "codigoCedente": 5670574,
+              "carteira": "104",
+              "localPagamento": "Até o vencimento, preferencialmente no Banco Itau",
+              "instrucoesPagamento": "Sr. Caixa, cobrar multa de 2% após o vencimento. Receber até 10 dias após o vencimento."
+            },
+          },
+        },
       },
       description: 'Boleto gerado com sucesso',
     },
