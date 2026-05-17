@@ -16,7 +16,9 @@ if (isNode) {
     },
     (info) => {
       console.log(`Server is running on Node.js port ${info.port}`);
-      console.log(`Access the API at http://localhost:${info.port}/api/boleto/generate`);
+      console.log(`Access the API at http://localhost:${info.port}`);
+      console.log(`Access the Swagger UI at http://localhost:${info.port}/swagger`);
+      console.log(`Access the OpenAPI JSON at http://localhost:${info.port}/openapi.json`);
     },
   );
 }
